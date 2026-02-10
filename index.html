@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Booking</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow: hidden;
+    background: #0f2027;
+}
+.navbar {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 14px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.navbar a {
+    color: #ffffff;
+    margin: 18px;
+    font-size: 17px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.navbar a:hover {
+    color: #ffcc00;
+}
+
+.section {
+    display: none;
+    position: absolute;
+    inset: 0;
+    padding-top: 110px;
+    text-align: center;
+    color: white;
+
+    background-image: url("https://images.unsplash.com/photo-1509749837427-ac94a2553d0e");
+    background-size: cover;
+    background-position: center;
+}
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: -1;
+}
+.section h1,
+.section h2,
+.section p {
+    text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+
+.active {
+    display: block;
+}
+
+.box {
+    background: rgba(255,255,255,0.95);
+    color: #333;
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    animation: fadeIn 0.6s ease;
+}
+h1, h2 {
+    font-weight: 600;
+    letter-spacing: 1px;
+    color:#ffcc00;
+}
+.outline-text {
+    color:#ff9800;
+    -webkit-text-stroke: 2px black;
+    font-size: 20px;
+    font-weight: bold;
+}
+.outline{
+    color:beige;
+    -webkit-text-stroke: 2px rgb(238, 147, 68);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #2c5364;
+    box-shadow: 0 0 5px rgba(44,83,100,0.6);
+}
+
+button {
+    width: 180px;
+    padding: 11px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(to right, #ff9800, #ffcc00);
+    color: #333;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #ffcc00, #ff9800);
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.row input {
+    flex: 1;
+}
+#register .box {
+    border-top: 5px solid #ff9800;
+}
+#login .box {
+    border-top: 5px solid #2193b0;
+}
+
+#contact .box {
+    border-top: 5px solid #4caf50;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#home a {
+    display: inline-block;
+    margin: 12px 10px;
+    padding: 8px 18px;
+    background: rgba(0, 0, 0, 0.6);   
+    color: #ffcc00;                 
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+#home a:hover {
+    background: #ffcc00;
+    color: #000;
+    transform: scale(1.05);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('booking')">Booking</a>
+    <a onclick="showSection('register')">Registration</a>
+    <a onclick="showSection('contact')">Contact</a>
+</div>
+<div id="home" class="section active">
+    <h1 class="outline">🚌 Easy Bus Booking</h1>
+    <p class="outline-text">Travel Smart. Book Faster.</p>
+    <button onclick="showSection('booking')">Book Now</button>
+    <a href="https://www.redbus.in" target="_blank">redBus</a>
+    <a href="https://www.abhibus.com" target="_blank">AbhiBus</a>
+
+</div>
+<div id="booking" class="section">
+    <h2 class="outline">Book Ticket</h2>
+    <div class="box">
+        <form onsubmit="return bookTicket()" id="loginForm">
+            <input type="text" id="name" placeholder="Name">
+
+            <div class="row">
+                <input type="text" id="from" placeholder="From">
+                <input type="text" id="to" placeholder="To">
+            </div>
+
+            <div class="row">
+                <input type="date" id="date">
+                <input type="time" id="time">
+            </div>
+
+            <input type="number" id="price" placeholder="Price">
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+
+        <div id="ticket"></div>
+        <br>
+        <a href="index1.html">Go to Display Page</a>
+    </div>
+</div>
+<div id="register" class="section">
+    <h2 class="outline">User Registration</h2>
+    <div class="box">
+        <form onsubmit="return registerUser()">
+            <input type="text" id="rname" placeholder="Full Name">
+
+            <div class="row">
+                <input type="email" id="remail" placeholder="Email">
+                <input type="text" id="rphone" placeholder="Phone">
+            </div>
+
+            <div class="row">
+                <input type="password" id="rpass" placeholder="Password">
+                <input type="password" id="rcpass" placeholder="Confirm Password">
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+<div id="contact" class="section">
+    <h2 class="outline">Contact Us</h2>
+    <div class="box">
+        <p>Email: BusBookings@bus.com</p>
+        <p>Phone: 9876543210</p>
+        <p>City: Hosur</p>
+    </div>
+</div>
+
+<script>
+function showSection(id) {
+    let sections = document.getElementsByClassName("section");
+    for (let i = 0; i < sections.length; i++) {
+        sections[i].classList.remove("active");
+    }
+    document.getElementById(id).classList.add("active");
+}
+
+function bookTicket() {
+    let name = document.getElementById("name").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+    let price = document.getElementById("price").value;
+
+    if(name=="" || from=="" || to=="" || date=="" || time=="" || price=="") {
+        alert("Fill all fields");
+        return false;
+    }
+
+    document.getElementById("ticket").innerHTML =
+        "<h3>Ticket Booked</h3>" +
+        "Name: " + name + "<br>" +
+        "From: " + from + "<br>" +
+        "To: " + to + "<br>" +
+        "Date: " + date + "<br>" +
+        "Time: " + time + "<br>" +
+        "Price: ₹" + price;
+
+    return false;
+}
+
+function registerUser() {
+    let pass = document.getElementById("rpass").value;
+    let cpass = document.getElementById("rcpass").value;
+
+    if(pass !== cpass) {
+        alert("Passwords do not match");
+        return false;
+    }
+
+    alert("Registration Successful!");
+    return false;
+}
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let from = document.getElementById("from").value;
+      let to = document.getElementById("to").value;
+      let date = document.getElementById("date").value;
+      let time = document.getElementById("time").value;
+      let price = document.getElementById("price").value;
+
+    
+      let storedData = JSON.parse(localStorage.getItem("loginData")) || [];
+
+      // Add new data
+      storedData.push({ name: name, from: from, to:to,date:date,time:time,price:price });
+
+      // Save back to localStorage
+      localStorage.setItem("loginData", JSON.stringify(storedData));
+
+      alert("Data Saved! Go to Display Page.");
+      this.reset();
+    });
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      
+      const userData = {
+        name: document.getElementById("name").value,
+        from: document.getElementById("from").value,
+        to: document.getElementById("to").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        price: document.getElementById("price").value
+
+
+
+      };
+
+      const res = await fetch("http://localhost:5001/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData)
+      });
+
+      const data = await res.json();
+      alert(data.message);
+    });
+</script>
+
+</body>
+</html>

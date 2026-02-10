@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Display Page</title>
+</head>
+<style>
+    body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1509749837427-ac94a2553d0e");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: -1;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    width: 600px;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.95);
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+ul li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+ul li:last-child {
+    border-bottom: none;
+}
+a {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    background: linear-gradient(to right, #ff9800, #ffcc00);
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+a:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #ffcc00, #ff9800);
+}
+
+</style>
+<body>
+  <h2>Submitted Booking Data</h2>
+  <ul id="dataList"></ul>
+
+  <a href="index.html">Go back to Login Page</a>
+
+  <script>
+    let storedData = JSON.parse(localStorage.getItem("loginData")) || [];
+    let dataList = document.getElementById("dataList");
+
+    storedData.forEach((entry, index) => {
+      let li = document.createElement("li");
+      li.textContent = `Name: ${entry.name}, From: ${entry.from},To: ${entry.to},Date: ${entry.date},Time: ${entry.time},Price: ${entry.price}`;
+      dataList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
