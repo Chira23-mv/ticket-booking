@@ -3,83 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <title>Display Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <style>
+    :root {
+      --bg-1: rgba(9, 16, 27, 0.72);
+      --panel: rgba(15, 23, 42, 0.5);
+      --gold: #ffd166;
+      --orange: #ff8a1d;
+      --line: rgba(255, 255, 255, 0.18);
+      --text: #f6fbff;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url("https://images.unsplash.com/photo-1509749837427-ac94a2553d0e");
-    background-size: cover;
-    background-position: center;
-    color: white;
-}
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px;
+      background: linear-gradient(180deg, rgba(3, 7, 15, 0.5), rgba(9, 14, 22, 0.4));
+      position: relative;
+    }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    z-index: -1;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/bus.svg'), url('https://source.unsplash.com/2200x1400/?bus,transport');
+      background-position: center center, center center;
+      background-size: cover, cover;
+      background-repeat: no-repeat, no-repeat;
+      transform: scale(1.04);
+      z-index: -2;
+      opacity: 1;
+      filter: saturate(1.05) brightness(1.02);
+    }
 
-h2 {
-    text-align: center;
-    margin-top: 30px;
-    letter-spacing: 1px;
-}
-ul {
-    list-style: none;
-    padding: 0;
-    width: 600px;
-    margin: 30px auto;
-    background: rgba(255,255,255,0.95);
-    color: #333;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-ul li {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-}
-ul li:last-child {
-    border-bottom: none;
-}
-a {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    text-align: center;
-    padding: 10px;
-    border-radius: 25px;
-    background: linear-gradient(to right, #ff9800, #ffcc00);
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2,6,10,0.12), rgba(2,6,10,0.04));
+      z-index: -1;
+      mix-blend-mode: normal;
+    }
 
-a:hover {
-    transform: scale(1.05);
-    background: linear-gradient(to right, #ffcc00, #ff9800);
-}
+    .card {
+      width: min(92%, 820px);
+      background: rgba(8, 12, 20, 0.4);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+      padding: 28px 22px 20px;
+    }
 
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      color: #fff9d9;
+      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 22px;
+      color: var(--text);
+      border-radius: 14px;
+      display: grid;
+      gap: 12px;
+      grid-auto-rows: min-content;
+    }
+
+    ul li {
+      padding: 14px 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+    }
+
+    .empty {
+      text-align: center;
+      color: #d9ebff;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    a {
+      display: block;
+      width: 220px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: #1d1b1a;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 10px 25px rgba(255, 154, 0, 0.3);
+    }
+
+    a:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 32px rgba(255, 154, 0, 0.42);
+    }
 </style>
 <body>
-  <h2>Submitted Booking Data</h2>
-  <ul id="dataList"></ul>
-
-  <a href="index.html">Go back to Login Page</a>
+  <div class="card">
+    <h2>Submitted Booking Data</h2>
+    <ul id="dataList"></ul>
+    <a href="index.html">Go back to Home</a>
+  </div>
 
   <script>
-    let storedData = JSON.parse(localStorage.getItem("loginData")) || [];
-    let dataList = document.getElementById("dataList");
+    const storedData = JSON.parse(localStorage.getItem("loginData") || "[]");
+    const dataList = document.getElementById("dataList");
 
-    storedData.forEach((entry, index) => {
-      let li = document.createElement("li");
-      li.textContent = `Name: ${entry.name}, From: ${entry.from},To: ${entry.to},Date: ${entry.date},Time: ${entry.time},Price: ${entry.price}`;
-      dataList.appendChild(li);
-    });
+    if (!storedData.length) {
+      const empty = document.createElement("li");
+      empty.className = "empty";
+      empty.textContent = "No tickets saved yet. Make your booking from the home page.";
+      dataList.appendChild(empty);
+    } else {
+      storedData.forEach((entry) => {
+        const li = document.createElement("li");
+        li.textContent = `Name: ${entry.name || "-"}, From: ${entry.from || "-"}, To: ${entry.to || "-"}, Date: ${entry.date || "-"}, Time: ${entry.time || "-"}, Price: ${entry.price || 0}, Passengers: ${entry.passengers || 1}`;
+        dataList.appendChild(li);
+      });
+    }
   </script>
 </body>
 </html>
